@@ -1,8 +1,9 @@
+
 import { CreateButton } from "@/components/buttons";
 import ContactTable from "@/components/contact-table";
 import Search from "@/components/search";
 import { getContactsPages } from "@/lib/data";
-import Pagination from "@/components/pagination.";
+import Pagination from "@/components/pagination";
 import { Suspense } from "react";
 import { TablesSkeleton } from "@/components/skeleton";
 
