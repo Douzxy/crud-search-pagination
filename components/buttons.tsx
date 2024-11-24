@@ -30,16 +30,29 @@ export const EditButton = ({ id }: { id: string }) => {
 };
 
 export const DeleteButton = ({ id }: { id: string }) => {
-  const DeleteContactWithId = deleteContact.bind(null, id);
+  // Pastikan deleteContact adalah fungsi yang valid dan diimpor dengan benar
+  const DeleteContactWithId = async () => {
+    try {
+      await deleteContact(id); // Panggil fungsi deleteContact dengan id
+      console.log(`Contact with ID: ${id} has been deleted.`);
+    } catch (error) {
+      console.error("Failed to delete contact:", error); // Log error untuk debugging
+    }
+  };
+
   return (
-    <form action={DeleteContactWithId}>
-      <button className="rounded-sm border p-1 hover:bg-gray-100">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault(); // Mencegah reload halaman
+        DeleteContactWithId();
+      }}
+    >
+      <button type="submit" className="rounded-sm border p-1 hover:bg-gray-100">
         <IoTrashOutline size={20} />
       </button>
     </form>
   );
 };
-
 export const SubmitButton = ({ label }: { label: string }) => {
   const { pending } = useFormStatus();
   const className = clsx(
